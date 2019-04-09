@@ -4,6 +4,19 @@
 
 {{ partial "short-text" .Params.blurb}}
 
+<div class="container is-medium-bottom-margin">
+    <div class="columns">
+        <div class="column is-4">
+            {{ partial "bio-blurb" }}
+        </div>
+        <div class="column is-8">
+            {{ partial "site-progress" }}
+        </div>
+    </div>
+</div>
+
+{{ partial "tiles" }}
+
 {{ partial "2-up" .Params }}
 
 {{ partial "text-and-image" (dict "heading" .Params.values.heading "text" .Params.values.text "buttonText" "Read more" "buttonLink" "/values") }}
