@@ -3,14 +3,15 @@
 {{ partial "jumbotron" (dict "imageUrl" .Params.image "title" .Title "subtitle" .Params.subtitle) }}
 
 {{ partial "short-text" .Params.blurb}}
-
-<div class="container is-medium-bottom-margin">
-    <div class="columns">
-        <div class="column is-4">
-            {{ partial "bio-blurb" }}
-        </div>
-        <div class="column is-8">
-            {{ partial "site-progress" }}
+<div class="section">
+    <div class="container is-medium-bottom-margin">
+        <div class="columns">
+            <div class="column is-4">
+                {{ partial "bio-blurb" }}
+            </div>
+            <div class="column is-8">
+                {{ partial "made-with" }}
+            </div>
         </div>
     </div>
 </div>

@@ -10,6 +10,8 @@ import webpackConfig from "./webpack.conf";
 import svgstore from "gulp-svgstore";
 import svgmin from "gulp-svgmin";
 import inject from "gulp-inject";
+import imagemin from "gulp-imagemin";
+import changed from "gulp-changed";
 import cssnano from "cssnano";
 
 const browserSync = BrowserSync.create();
@@ -27,8 +29,8 @@ if (process.env.DEBUG) {
 
 gulp.task("hugo", (cb) => buildSite(cb));
 gulp.task("hugo-preview", (cb) => buildSite(cb, ["--buildDrafts", "--buildFuture"]));
-gulp.task("build", ["css", "js", "hugo"]);
-gulp.task("build-preview", ["css", "js", "hugo-preview"]);
+gulp.task("build", ["css", "imagemin", "js", "hugo"]);
+gulp.task("build-preview", ["css", "imagemin", "js", "hugo-preview"]);
 
 gulp.task("css", () => (
   gulp.src("./src/css/*.css")
@@ -40,6 +42,33 @@ gulp.task("css", () => (
     //cssnano(),
   ]))
   .pipe(gulp.dest("./dist/css"))
+  .pipe(browserSync.stream())
+));
+
+gulp.task('imagemin', () => (
+  gulp.src('./src/img/*')
+  .pipe(changed("./dist/img"))
+  .pipe(imagemin([
+    imagemin.gifsicle({
+      interlaced: true
+    }),
+    imagemin.jpegtran({
+      progressive: true
+    }),
+    imagemin.optipng({
+      optimizationLevel: 5
+    }),
+    imagemin.svgo({
+      plugins: [{
+          removeViewBox: true
+        },
+        {
+          cleanupIDs: false
+        }
+      ]
+    })
+  ]))
+  .pipe(gulp.dest('./dist/img'))
   .pipe(browserSync.stream())
 ));
 
@@ -77,7 +106,7 @@ gulp.task("svg", () => {
     .pipe(gulp.dest("site/layouts/partials/"));
 });
 
-gulp.task("server", ["hugo", "css", "js", "svg"], () => {
+gulp.task("server", ["hugo", "css", "imagemin", "js", "svg"], () => {
   browserSync.init({
     server: {
       baseDir: "./dist"
@@ -85,6 +114,7 @@ gulp.task("server", ["hugo", "css", "js", "svg"], () => {
   });
   gulp.watch("./src/js/**/*.js", ["js"]);
   gulp.watch("./src/css/**/*.css", ["css"]);
+  gulp.watch("./src/img/*.+(png|jpg|jpeg|gif)", ["imagemin"]);
   gulp.watch("./site/static/img/icons-*.svg", ["svg"]);
   gulp.watch("./site/**/*", ["hugo"]);
 });
