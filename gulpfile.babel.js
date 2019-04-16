@@ -41,36 +41,42 @@ gulp.task("css", () => (
     cssnext(),
     //cssnano(),
   ]))
-  .pipe(gulp.dest("./dist/css"))
+  .pipe(gulp.dest("./dist/css/"))
   .pipe(browserSync.stream())
 ));
 
-gulp.task('imagemin', () => (
+gulp.task('imagemin', () =>
   gulp.src('./src/img/*')
-  .pipe(changed("./dist/img"))
-  .pipe(imagemin([
-    imagemin.gifsicle({
-      interlaced: true
-    }),
-    imagemin.jpegtran({
-      progressive: true
-    }),
-    imagemin.optipng({
-      optimizationLevel: 5
-    }),
-    imagemin.svgo({
-      plugins: [{
-          removeViewBox: true
-        },
-        {
-          cleanupIDs: false
-        }
-      ]
-    })
-  ]))
-  .pipe(gulp.dest('./dist/img'))
-  .pipe(browserSync.stream())
-));
+  .pipe(imagemin())
+  .pipe(gulp.dest('./dist/img/'))
+);
+
+// gulp.task('imagemin', () => (
+//   gulp.src('./dist/img/*.+(png|jpg|jpeg|gif)')
+//   .pipe(changed("./dist/img/"))
+//   .pipe(imagemin([
+//     imagemin.gifsicle({
+//       interlaced: true
+//     }),
+//     imagemin.jpegtran({
+//       progressive: true
+//     }),
+//     imagemin.optipng({
+//       optimizationLevel: 5
+//     }),
+//     imagemin.svgo({
+//       plugins: [{
+//           removeViewBox: true
+//         },
+//         {
+//           cleanupIDs: false
+//         }
+//       ]
+//     })
+//   ]))
+//   .pipe(gulp.dest('./src/img/'))
+//   .pipe(browserSync.stream())
+// ));
 
 gulp.task("js", (cb) => {
   const myConfig = Object.assign({}, webpackConfig);
