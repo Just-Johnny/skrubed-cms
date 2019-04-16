@@ -1,9 +1,79 @@
 /* Additional Helper Classes */
+.header-spacing {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
 .is-medium-bottom-margin {
     margin-bottom: 3rem;
 }
 
-/* Bulma Overridessss */
+.is-standard-bottom-margin {
+    margin-bottom: 1rem;
+}
+
+.inner-text-padding {
+    padding: 0.25rem 0.5rem 0.25rem;
+}
+
+.element-background {
+    background-color: #192227;
+    border-radius: 5px;
+}
+
+/* Page & Post Classes */
+.post h1 {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.post h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.post p {
+    margin-bottom: 1rem;
+}
+
+.post-date {
+    color: #446e7a;
+}
+
+.post-image {
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.newsletter-wrapper {
+    padding: 1rem;
+}
+
+.newsletter-wrapper h4 {
+    color: #e3d705;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Bulma Overrides */
+html {
+    background-color: #263238;
+}
+
+body {
+    color: whitesmoke;
+}
+
+a {
+    color: #89ddf1;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #c790e4;
+}
+
 .navbar-item img {
     max-height: 43px;
     max-height: 2rem;
@@ -13,6 +83,30 @@
     margin-bottom: 10px;
 }
 
+a.button {
+    text-decoration: none;
+}
+
+.button.is-info {
+    background-color: #89ddf1;
+    color: #192227;
+}
+
+.button.is-info:hover,
+.button.is-info.is-hovered,
+.button.is-info:active,
+.button.is-info.is-active {
+    background-color: #7fccde;
+    color: #192227;
+}
+
+code {
+    background-color: #192227;
+    color: #446e7a;
+    border-radius: 5px;
+}
+
+/* Navigation */
 header {
     background: #209cee;
     padding-top: 1rem;
@@ -23,8 +117,6 @@ header {
     width: 100%;
 }
 
-/* changed this from the tutorial video to
-     allow it to gain focus, making it tabbable */
 .nav-toggle {
     position: absolute !important;
     top: -9999px !important;
